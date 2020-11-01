@@ -6,6 +6,16 @@ int findsize(char* array) {
 	}
 	return stringsize;
 }
+int onlychars(char* word,int size) {
+	for (int i = 0; i < size; i++) {
+		//printf(" %c ", word[i]);
+
+		if( (word[i]<65) || ((word[i] > 65) && (word[i] < 90)) || ((word[i] > 90) && (word[i] < 97)) || (word[i] > 122)){
+			return 0;
+		}
+	}
+	return 1;
+}
 void sort(char* string, char* firstword, char* secondword) {
 	int firstwordsize = findsize(firstword);
 	//printf("firstword size: %d", firstwordsize);
@@ -62,10 +72,30 @@ void sort(char* string, char* firstword, char* secondword) {
 int main() {
 	char firstword[1000] = { 0 };
 	char secondword[1000] = { 0 };
-	printf("enter first string: ");
+	int deb = 1;
+	printf("enter first word: ");
 	fgets(firstword, 1000, stdin);
-	printf("enter second string: ");
+	int firstwordsize = findsize(firstword);
+	//printf("%d", firstword[0]);
+	while (onlychars(firstword,firstwordsize) == 0) {
+		for (int i = 0; i < 1000; i++) {
+			firstword[i] = 0;
+		}
+		printf("enter first word: ");
+		fgets(firstword, 1000, stdin);
+		firstwordsize = findsize(firstword);
+	}
+	printf("enter second word: ");
 	fgets(secondword, 1000, stdin);
+	int secondsize = findsize(secondword);
+	while (onlychars(secondword,secondsize) == 0) {
+		for (int i = 0; i < 1000; i++) {
+			secondword[i] = 0;
+		}
+		printf("enter second word: ");
+		fgets(secondword, 1000, stdin);
+		secondsize = findsize(secondword);
+	}
 	printf("enter string: ");
 	char string[1000];
 	fgets(string, 1000, stdin);
