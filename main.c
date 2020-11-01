@@ -1,21 +1,12 @@
 #include<stdio.h>
 int findsize(char* array) {
 	int stringsize = 0;
-	while ((*(array + stringsize) != '\n') || (*(array + stringsize) != 10)) {
+	while ((*(array + stringsize) != '\n')) {
 		stringsize++;
 	}
 	return stringsize;
 }
-int main() {
-	char firstword[1000] = { 0 };
-	char secondword[1000] = { 0 };
-	printf("enter first string: ");
-	fgets(firstword, 1000, stdin);
-	printf("enter second string: ");
-	fgets(secondword, 1000, stdin);
-	printf("enter string: ");
-	char string[1000];
-	fgets(string, 1000, stdin);
+void sort(char* string, char* firstword, char* secondword) {
 	int firstwordsize = findsize(firstword);
 	//printf("firstword size: %d", firstwordsize);
 	int secondwordsize = findsize(secondword);
@@ -30,7 +21,7 @@ int main() {
 	for (int i = 0; i < 1000; i++) {
 		if (string[i] == firstword[co]) {
 			co++;
-			
+
 		}
 		else co = 0;
 		if (co == firstwordsize) {
@@ -38,11 +29,11 @@ int main() {
 			//printf("\nstring - co: %d\n",i-co);
 			if (wordsdifference > 0) {
 				for (int j = i; j < stringsize; j++) {
-					
-						//printf("\nj - wordsdifference %d", j - wordsdifference);
-						string[j - wordsdifference] = string[j];
-						string[j] = 0;
-					
+
+					//printf("\nj - wordsdifference %d", j - wordsdifference);
+					string[j - wordsdifference] = string[j];
+					string[j] = 0;
+
 				}
 			}
 			else if (wordsdifference < 0) {
@@ -52,7 +43,7 @@ int main() {
 					string[j] = 0;
 				}
 			}
-			for (int j = i - firstwordsize+1; j < i - firstwordsize + secondwordsize+1; j++) {
+			for (int j = i - firstwordsize + 1; j < i - firstwordsize + secondwordsize + 1; j++) {
 				string[j] = secondword[k];
 				k++;
 			}
@@ -63,9 +54,22 @@ int main() {
 		}
 	}
 	printf("sorted string: \"");
-	for (int i = 0; i < stringsize -g*wordsdifference; i++) {
-			printf("%c", string[i]);
+	for (int i = 0; i < stringsize - g * wordsdifference; i++) {
+		printf("%c", string[i]);
 	}
 	printf("\"");
+}
+int main() {
+	char firstword[1000] = { 0 };
+	char secondword[1000] = { 0 };
+	printf("enter first string: ");
+	fgets(firstword, 1000, stdin);
+	printf("enter second string: ");
+	fgets(secondword, 1000, stdin);
+	printf("enter string: ");
+	char string[1000];
+	fgets(string, 1000, stdin);
+	sort(string, firstword, secondword);
+	
 	return 0;
 }
