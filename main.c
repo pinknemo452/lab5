@@ -96,7 +96,14 @@ int main() {
 		fgets(firstword, 1000, stdin);
 		fputc('\r', stdin);
 		firstwordsize = findsize(firstword);
-		
+		while (firstword[0] == '\n' || firstword[0] == ' ' || firstword[0] == '\0') {
+			for (int i = 0; i < 1000; i++) {
+				firstword[i] = 0;
+			}
+			printf("enter first word: ");
+			fgets(firstword, 1000, stdin);
+			fputc('\r', stdin);
+		}
 	}
 	printf("enter second word: ");
 	fgets(secondword, 1000, stdin);
@@ -117,7 +124,13 @@ int main() {
 		fgets(secondword, 1000, stdin);
 		fputc('\r', stdin);
 		secondsize = findsize(secondword);
-
+		while (secondword[0] == '\n' || secondword[0] == ' ' || secondword[0] == '\0') {
+			for (int i = 0; i < 1000; i++) {
+				secondword[i] = 0;
+			}
+			printf("enter second word: ");
+			fgets(secondword, 1000, stdin);
+		}
 	}
 	fputc('\r', stdin);
 	printf("enter string: ");
