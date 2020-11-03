@@ -14,7 +14,10 @@ int onlychars(char* word,int size) {
 			return 0;
 		}
 	}
-	return 1;
+	if (size != 0) {
+		return 1;
+	}
+	else return 0;
 }
 void sort(char* string, char* firstword, char* secondword) {
 	int firstwordsize = findsize(firstword);
@@ -70,21 +73,15 @@ void sort(char* string, char* firstword, char* secondword) {
 	printf("\"");
 }
 int main() {
+	char g[1000];
 	char firstword[1000] = { 0 };
 	char secondword[1000] = { 0 };
 	int deb = 1;
 	printf("enter first word: ");
-	
 	fgets(firstword, 1000, stdin);
-	
-	fputc(13, stdin);
-	while (firstword[0] == '\n' || firstword[0] == ' ' || firstword[0] == '\0') {
-		for (int i = 0; i < 1000; i++) {
-			firstword[i] = 0;
-		}
-		printf("enter first word: ");
-		fgets(firstword, 1000, stdin);
-		fputc(13, stdin);
+	//printf("%d", firstword[0]);
+	if (firstword[0] == 10) {
+		fgets(g,1000, stdin);
 	}
 	int firstwordsize = findsize(firstword);
 	//printf("%d", firstword[1]);
@@ -94,7 +91,9 @@ int main() {
 		}
 		printf("enter first word: ");
 		fgets(firstword, 1000, stdin);
-		fputc(13, stdin);
+		if (firstword[0] == 10) {
+			fgets(g, 1000, stdin);
+		}
 		firstwordsize = findsize(firstword);
 		while (firstword[0] == '\n' || firstword[0] == ' ' || firstword[0] == '\0') {
 			for (int i = 0; i < 1000; i++) {
@@ -102,18 +101,26 @@ int main() {
 			}
 			printf("enter first word: ");
 			fgets(firstword, 1000, stdin);
-			fputc(13, stdin);
+			if (firstword[0] == 10) {
+				fgets(g, 1000, stdin);
+			}
 		}
 	}
 	printf("enter second word: ");
+	
 	fgets(secondword, 1000, stdin);
-	fputc(13, stdin);
+	if (secondword[0] == 10) {
+		fgets(g, 1000, stdin);
+	}
 	while (secondword[0] == '\n' || secondword[0] == ' ' || secondword[0] == '\0') {
 		for (int i = 0; i < 1000; i++) {
 			secondword[i] = 0;
 		}
 		printf("enter second word: ");
 		fgets(secondword, 1000, stdin);
+		if (secondword[0] == 10) {
+			fgets(g, 1000, stdin);
+		}
 	}
 	int secondsize = findsize(secondword);
 	while (onlychars(secondword,secondsize) == 0) {
@@ -122,17 +129,12 @@ int main() {
 		}
 		printf("enter second word: ");
 		fgets(secondword, 1000, stdin);
-		fputc(13, stdin);
-		secondsize = findsize(secondword);
-		while (secondword[0] == '\n' || secondword[0] == ' ' || secondword[0] == '\0') {
-			for (int i = 0; i < 1000; i++) {
-				secondword[i] = 0;
-			}
-			printf("enter second word: ");
-			fgets(secondword, 1000, stdin);
+		if (secondword[0] == 10) {
+			fgets(g, 1000, stdin);
 		}
+		secondsize = findsize(secondword);
 	}
-	fputc(13, stdin);
+	
 	printf("enter string: ");
 	char string[1000];
 	fgets(string, 1000, stdin);
