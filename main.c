@@ -1,7 +1,8 @@
 #include<stdio.h>
+
 int findsize(char* array) {
 	int stringsize = 0;
-	while ((*(array + stringsize) != '\n')) {
+	while ((array[stringsize] != '\n')) {
 		stringsize++;
 	}
 	return stringsize;
@@ -9,8 +10,7 @@ int findsize(char* array) {
 int onlychars(char* word,int size) {
 	for (int i = 0; i < size; i++) {
 		//printf(" %c ", word[i]);
-
-		if( (word[i]<'A') || ((word[i] > 'Z') && (word[i] < 'a')) || (word[i] > 'z') ){
+		if( (word[i]<'A') || ((word[i] > 'Z') && (word[i] < 'a')) || (word[i] > 'z')  ){
 			return 0;
 		}
 	}
@@ -74,19 +74,40 @@ int main() {
 	char secondword[1000] = { 0 };
 	int deb = 1;
 	printf("enter first word: ");
+	
 	fgets(firstword, 1000, stdin);
+	
+	fputc('\r', stdin);
+	while (firstword[0] == '\n' || firstword[0] == ' ' || firstword[0] == '\0') {
+		for (int i = 0; i < 1000; i++) {
+			firstword[i] = 0;
+		}
+		printf("enter first word: ");
+		fgets(firstword, 1000, stdin);
+		fputc('\r', stdin);
+	}
 	int firstwordsize = findsize(firstword);
-	//printf("%d", firstword[0]);
+	//printf("%d", firstword[1]);
 	while (onlychars(firstword,firstwordsize) == 0) {
 		for (int i = 0; i < 1000; i++) {
 			firstword[i] = 0;
 		}
 		printf("enter first word: ");
 		fgets(firstword, 1000, stdin);
+		fputc('\r', stdin);
 		firstwordsize = findsize(firstword);
+		
 	}
 	printf("enter second word: ");
 	fgets(secondword, 1000, stdin);
+	fputc('\r', stdin);
+	while (secondword[0] == '\n' || secondword[0] == ' ' || secondword[0] == '\0') {
+		for (int i = 0; i < 1000; i++) {
+			secondword[i] = 0;
+		}
+		printf("enter second word: ");
+		fgets(secondword, 1000, stdin);
+	}
 	int secondsize = findsize(secondword);
 	while (onlychars(secondword,secondsize) == 0) {
 		for (int i = 0; i < 1000; i++) {
@@ -94,8 +115,11 @@ int main() {
 		}
 		printf("enter second word: ");
 		fgets(secondword, 1000, stdin);
+		fputc('\r', stdin);
 		secondsize = findsize(secondword);
+
 	}
+	fputc('\r', stdin);
 	printf("enter string: ");
 	char string[1000];
 	fgets(string, 1000, stdin);
